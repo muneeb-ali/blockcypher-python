@@ -1658,11 +1658,7 @@ def create_unsigned_tx(inputs, outputs, change_address=None,
     else:
         params = {}
 
-    # Nasty Hack - remove when API updated
-    if 'wallet_token' in inputs[0]:
-        params['token'] = inputs[0]['wallet_token']
-    elif api_key:
-        params['token'] = api_key
+    params['token'] = api_key
 
     r = requests.post(url, json=data, params=params, verify=True, timeout=TIMEOUT_IN_SECONDS)
     _assert_not_rate_limited(r)
